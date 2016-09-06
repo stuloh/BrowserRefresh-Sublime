@@ -1,5 +1,5 @@
 from subprocess import call
-
+import sublime
 
 class MacBrowserRefresh:
     def __init__(self, activate_browser):
@@ -26,6 +26,19 @@ class MacBrowserRefresh:
     def chrome(self):
         self._chrome("Google Chrome", "chrome")
 
+    def chrome_parallels(self):
+        command = """
+            tell application "/Applications/Google Chrome.app"
+                {activate}
+                tell the active tab of its first window
+                    reload
+                end tell
+            end tell
+            """.format(activate=self.activate)
+        # tell application "System Events" to keystroke "r" using command down
+
+        self._call_applescript(command)
+
     def canary(self):
         self._chrome("Google Chrome Canary", "canary")
 
@@ -34,7 +47,7 @@ class MacBrowserRefresh:
 
     def safari(self):
         command = """
-            tell application "Safari"
+            tell application "/Applications/Google Chrome.app"
                 {activate}
                 tell its first document
                     set its URL to (get its URL)

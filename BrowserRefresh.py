@@ -18,7 +18,7 @@ if _pywinauto not in sys.path:
     sys.path.insert(0, _pywinauto)
 
 
-class BrowserRefreshCommand(sublime_plugin.TextCommand):
+class BrowserRefreshModCommand(sublime_plugin.TextCommand):
     def run(self, args, activate=True,
             browsers=['chrome'], auto_save=True, delay=None):
 
@@ -49,6 +49,9 @@ class BrowserRefreshCommand(sublime_plugin.TextCommand):
         # Actually refresh browsers
         if 'chrome' in browsers:
             refresher.chrome()
+
+        if 'chrome_parallels' in browsers:
+            refresher.chrome_parallels()
 
         if 'canary' in browsers and _os == 'Darwin':
             refresher.canary()
