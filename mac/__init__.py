@@ -1,5 +1,4 @@
 from subprocess import call
-import sublime
 
 class MacBrowserRefresh:
     def __init__(self, activate_browser):
@@ -35,7 +34,7 @@ class MacBrowserRefresh:
                 end tell
             end tell
             """.format(activate=self.activate)
-        # tell application "System Events" to keystroke "r" using command down
+        # Alt refresh command: tell application "System Events" to keystroke "r" using command down
 
         self._call_applescript(command)
 
@@ -47,7 +46,7 @@ class MacBrowserRefresh:
 
     def safari(self):
         command = """
-            tell application "/Applications/Google Chrome.app"
+            tell application "Safari"
                 {activate}
                 tell its first document
                     set its URL to (get its URL)
